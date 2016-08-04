@@ -34,6 +34,6 @@ public class Parent implements ParentListItem {
 
     @Override
     public boolean isInitiallyExpanded() {
-        return false;
+        return true;
     }
 }

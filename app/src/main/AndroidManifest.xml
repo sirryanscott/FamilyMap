@@ -23,11 +23,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Person.PersonActivity"
             android:screenOrientation="reversePortrait">
         </activity>
+        <activity
+            android:name=".Map.MapActivity"
+            android:screenOrientation="reversePortrait"></activity>
     </application>
 
 </manifest>

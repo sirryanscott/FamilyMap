@@ -34,6 +34,7 @@ public class PersonChildViewHolder extends ChildViewHolder {
             public void onClick(View view) {
                 if (eventId != null) {
                     //start map activity
+                    ((PersonActivity) view.getContext()).startMapActivity(eventId);
                 } else {
                     //start person activity
                     ((PersonActivity) view.getContext()).startPersonActivity(personId);

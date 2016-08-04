@@ -1,6 +1,8 @@
 package com.example.sirryanscott.familymap.Map;
 
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,24 +12,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.sirryanscott.familymap.MainActivity;
 import com.example.sirryanscott.familymap.Model.Event;
 import com.example.sirryanscott.familymap.Model.FamilyMapData;
 import com.example.sirryanscott.familymap.Model.Person;
+import com.example.sirryanscott.familymap.Person.PersonActivity;
 import com.example.sirryanscott.familymap.R;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -50,6 +50,11 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
     private View myView;
 
     private String personID;
+    private Event event;
+    TextView nameInformation;
+    TextView eventDetails;
+    ImageView genderImageView;
+    private HashMap<Marker, String> markerStringHashMap = new HashMap<>();
 
     public FamilyMapFragment() {
         // Required empty public constructor
@@ -83,16 +88,29 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         myView = inflater.inflate(R.layout.fragment_family_map, container, false);
+        nameInformation = (TextView) myView.findViewById(R.id.nameInformation);
+        eventDetails = (TextView) myView.findViewById(R.id.eventDetails);
+        genderImageView = (ImageView) myView.findViewById(R.id.genderIcon);
+
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.googleMap);
         mapFragment.getMapAsync(this);
+
+        String eventId = getArguments().getString("eventId");
+        if (eventId != null) {
+            event = FamilyMapData.getInstance().getEventMap().get(eventId);
+            setPersonTextViews(eventId);
+        }
+
 
         LinearLayout eventDetails = (LinearLayout) myView.findViewById(R.id.allEventDetails);
         eventDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //start Person Activity not Fragment
-                ((MainActivity)getActivity()).startPersonActivity(personID);
+                Intent intent = new Intent(getActivity(), PersonActivity.class);
+                intent.putExtra("personId", personID);
+                startActivity(intent);
             }
         });
         return myView;
@@ -105,56 +123,34 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
             Event event = iterator.getValue();
             Marker marker = googleMap.addMarker(
                     new MarkerOptions()
-                    .position(event.getPosition()));
-            event.setMarker(marker);
+                            .position(event.getPosition()).icon(BitmapDescriptorFactory.defaultMarker(Color.BLACK)));
+            markerStringHashMap.put(marker, event.getEventId());
         }
-
-
-
-
-        //Todo: iterate through everyone and assign relationships (parents, spouse, children)
-        //Todo: assign all event to the right people (list of events in person class)
-        //Todo: assign colors to events
-        FamilyMapData.getInstance().linkFamilyToPerson();
-        FamilyMapData.getInstance().linkEventsToPerson();
-
-
-
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                boolean result = setCustomerTextViews(marker);
-                return result;
+                String eventId = markerStringHashMap.get(marker);
+                setPersonTextViews(eventId);
+                return false;
             }
         });
     }
 
-    private boolean setCustomerTextViews (Marker marker){
-        if(marker != null) {
-            for(Map.Entry<String, Event> iterator : FamilyMapData.getInstance().getEventMap().entrySet()){
-                Event event = iterator.getValue();
-                if(event.getMarker().equals(marker)){
+    private void setPersonTextViews(String eventId) {
+        if (eventId != null) {
+            Event event = FamilyMapData.getInstance().getEventMap().get(eventId);
                     String personId = event.getPersonId();
                     this.personID = personId;
                     Person person = FamilyMapData.getInstance().getPersonMap().get(personId);
 
-                    TextView nameInformation = (TextView) myView.findViewById(R.id.nameInformation);
                     nameInformation.setText(person.getFullName());
 
-                    TextView eventDetails = (TextView) myView.findViewById(R.id.eventDetails);
                     eventDetails.setText(event.getFullDescription());
 
                     setGenderIcon(person);
 
                     //Todo: draw lines (relationships, events)
 
-                    return true;
-                }
-            }
-            return false;
-        }
-        else{
-            return false;
         }
     }
 
@@ -168,7 +164,6 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
             genderIcon = new IconDrawable(getActivity(), Iconify.IconValue.fa_female).color(16728448).sizeDp(40);  //COLOR: pink
         }
 
-        ImageView genderImageView = (ImageView) myView.findViewById(R.id.genderIcon);
         genderImageView.setImageDrawable(genderIcon);
     }
 }

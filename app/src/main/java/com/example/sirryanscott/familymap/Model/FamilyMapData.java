@@ -1,22 +1,14 @@
 package com.example.sirryanscott.familymap.Model;
 
-import android.graphics.drawable.Drawable;
-import android.util.ArraySet;
-
 import com.example.sirryanscott.familymap.Login.LoginData;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.joanzapata.android.iconify.IconDrawable;
-import com.joanzapata.android.iconify.Iconify;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -161,6 +153,7 @@ public class FamilyMapData {
                     }
                 }
             }
+            linkFamilyToPerson();
             return true;
         }
     }
@@ -222,6 +215,8 @@ public class FamilyMapData {
                     return false;
                 }
             }
+
+            linkEventsToPerson();
             return true;
         }
     }

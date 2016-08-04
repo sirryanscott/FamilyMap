@@ -1,16 +1,11 @@
 package com.example.sirryanscott.familymap;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
 
 import com.example.sirryanscott.familymap.Login.LoginFragment;
 import com.example.sirryanscott.familymap.Map.FamilyMapFragment;
-import com.example.sirryanscott.familymap.Model.Person;
-import com.example.sirryanscott.familymap.Person.PersonActivity;
-import com.example.sirryanscott.familymap.Person.PersonFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,11 +25,5 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.mainFragmentHolder, familyMapFragment).commit();
-    }
-
-    public void startPersonActivity(String personId){
-        Intent intent = new Intent(this, PersonActivity.class);
-        intent.putExtra("personId", personId);
-        startActivity(intent);
     }
 }
