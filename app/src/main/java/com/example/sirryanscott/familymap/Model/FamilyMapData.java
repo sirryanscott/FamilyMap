@@ -8,9 +8,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+import java.util.Random;
 import java.util.TreeMap;
 
 /**
@@ -21,7 +21,7 @@ public class FamilyMapData {
     private TreeMap<String, Person> personMap;
     private TreeMap<String, Event> eventMap;
     private TreeMap<Marker, Event> markerEventTreeMap;
-    private Set<String> uniqueEvents;
+    private HashMap<String, Float> uniqueEvents;
 
     private static FamilyMapData ourInstance = new FamilyMapData();
 
@@ -33,14 +33,14 @@ public class FamilyMapData {
         personMap = new TreeMap<>();
         eventMap = new TreeMap<>();
         markerEventTreeMap = new TreeMap<>();
-        uniqueEvents = new HashSet<>();
+        uniqueEvents = new HashMap();
     }
 
-    public Set<String> getUniqueEvents() {
+    public HashMap<String, Float> getUniqueEvents() {
         return uniqueEvents;
     }
 
-    public void setUniqueEvents(Set<String> uniqueEvents) {
+    public void setUniqueEvents(HashMap<String, Float> uniqueEvents) {
         this.uniqueEvents = uniqueEvents;
     }
 
@@ -208,7 +208,12 @@ public class FamilyMapData {
                     eventMap.put(event.getEventId(), event);
 
                     //Todo: a set of unique events is needed for color of markers and for filter
-                    uniqueEvents.add(event.getDescription().toUpperCase());
+                    if (!uniqueEvents.containsKey(event.getDescription().toUpperCase())) {
+                        float color = new Random().nextInt(361);
+                        uniqueEvents.put(event.getDescription().toUpperCase(), color);
+                    }
+
+                    event.setColor(uniqueEvents.get(event.getDescription().toUpperCase()));
 
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -1,6 +1,5 @@
 package com.example.sirryanscott.familymap.Model;
 
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
@@ -16,7 +15,7 @@ public class Event {
     private double longitude;
     private LatLng position;
     private Marker marker;
-    private BitmapDescriptorFactory color;
+    private float color;
     private String country;
     private String city;
     private String description;
@@ -24,11 +23,11 @@ public class Event {
     private String descendantId;
     private String fullDescription;
 
-    public BitmapDescriptorFactory getColor() {
+    public float getColor() {
         return color;
     }
 
-    public void setColor(BitmapDescriptorFactory color) {
+    public void setColor(float color) {
         this.color = color;
     }
 

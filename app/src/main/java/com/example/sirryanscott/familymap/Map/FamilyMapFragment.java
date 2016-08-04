@@ -2,7 +2,6 @@ package com.example.sirryanscott.familymap.Map;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -123,7 +122,8 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
             Event event = iterator.getValue();
             Marker marker = googleMap.addMarker(
                     new MarkerOptions()
-                            .position(event.getPosition()).icon(BitmapDescriptorFactory.defaultMarker(Color.BLACK)));
+                            .position(event.getPosition())
+                            .icon(BitmapDescriptorFactory.defaultMarker(event.getColor())));
             markerStringHashMap.put(marker, event.getEventId());
         }
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
