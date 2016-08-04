@@ -48,5 +48,10 @@ public class ExpandableAdapter extends ExpandableRecyclerAdapter<PersonParentVie
         childViewHolder.topPanel.setText(child.getTopPanel());
         childViewHolder.bottomPanel.setText(child.getBottomPanel());
         childViewHolder.imageView.setImageDrawable(child.getImage());
+        if (child.getEventId() != null) {
+            childViewHolder.setEventId(child.getEventId());
+        } else {
+            childViewHolder.setPersonId(child.getPersonId());
+        }
     }
 }

@@ -1,8 +1,5 @@
 package com.example.sirryanscott.familymap.Person;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,13 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
-import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
-import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
 import com.example.sirryanscott.familymap.Model.Event;
 import com.example.sirryanscott.familymap.Model.FamilyMapData;
 import com.example.sirryanscott.familymap.Model.Person;
@@ -24,7 +16,6 @@ import com.example.sirryanscott.familymap.R;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -118,6 +109,7 @@ public class PersonFragment extends Fragment {
                     currentPerson.getFullName(),
                     new IconDrawable(getActivity(), Iconify.IconValue.fa_map_marker).color(8421504).sizeDp(40) //color gray
             );
+            child.setEventId(event.getEventId());
             childrenEvent.add(child);
         }
 
@@ -143,6 +135,7 @@ public class PersonFragment extends Fragment {
                     iconDrawable
             );
 
+            childSpouse.setPersonId(spouse.getPersonId());
             childrenFamily.add(childSpouse);
         }
 
@@ -156,6 +149,7 @@ public class PersonFragment extends Fragment {
                     iconDrawable
             );
 
+            childFather.setPersonId(father.getPersonId());
             childrenFamily.add(childFather);
         }
 
@@ -169,6 +163,7 @@ public class PersonFragment extends Fragment {
                     iconDrawable
             );
 
+            childMother.setPersonId(mother.getPersonId());
             childrenFamily.add(childMother);
         }
 
@@ -192,14 +187,10 @@ public class PersonFragment extends Fragment {
                         iconDrawable
                 );
 
+                child.setPersonId(personChild.getPersonId());
                 childrenFamily.add(child);
             }
         }
-
-//        Child child1 = new Child("NAME", "DATE", new IconDrawable(getActivity(), Iconify.IconValue.fa_male).color(255).sizeDp(40));
-//        Child child2 = new Child("name", "date", new IconDrawable(getActivity(), Iconify.IconValue.fa_female).color(16728448).sizeDp(40));
-//        Child child3 = new Child("RYAN", "STRUTHERS", new IconDrawable(getActivity(), Iconify.IconValue.fa_male).color(255).sizeDp(40));
-//        Child child4 = new Child("JENI", "STRUTHERS", new IconDrawable(getActivity(), Iconify.IconValue.fa_female).color(16728448).sizeDp(40));
 
         Parent parent1 = new Parent(childrenEvent);
         parent1.setTitle("LIFE EVENTS");
