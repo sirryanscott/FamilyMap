@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FamilyMap</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="firstNameLabel">FIRST NAME</string>
+    <string name="lastNameLabel">LAST NAME</string>
+    <string name="gender">GENDER</string>
+</resources>

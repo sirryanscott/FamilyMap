@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Person.PersonFragment">
+
+    <TextView
+        android:id="@+id/firstName"
+        android:textSize="12pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/firstNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/firstNameLabel"/>
+
+    <View
+        android:background="#808080"
+        android:layout_width = "wrap_content"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/lastName"
+        android:textSize="12pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/lastNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lastNameLabel"/>
+
+    <View android:background="#808080"
+        android:layout_width = "wrap_content"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:textSize="12pt"
+        android:id="@+id/gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/genderLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gender"/>
+
+    <View android:background="#808080"
+        android:layout_width = "wrap_content"
+        android:layout_height="1dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        app:layoutManager="LinearLayoutManager"
+        android:id="@+id/events"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
