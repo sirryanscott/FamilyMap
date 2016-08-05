@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     public void startMapFragment(){
         FamilyMapFragment familyMapFragment = FamilyMapFragment.newInstance();
 
+        familyMapFragment.setFragmentForMain(true);
+
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.mainFragmentHolder, familyMapFragment).commit();
     }

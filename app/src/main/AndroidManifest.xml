@@ -12,14 +12,15 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDHCLBvV6cjbSArwVgcSQQ8uKBwdvL-AcQ" />
+            android:value="AIzaSyD9w-BQBIMVsFExgOk_NnyR0WBY7XeQJW4"/>
+            <!--
+            android:value="AIzaSyDHCLBvV6cjbSArwVgcSQQ8uKBwdvL-AcQ"/>
+            -->
 
         <activity
             android:name=".MainActivity"
             android:screenOrientation="reversePortrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sirryanscott.familymap.MainActivity" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,10 +30,17 @@
         <activity
             android:name=".Person.PersonActivity"
             android:screenOrientation="reversePortrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sirryanscott.familymap.Person.PersonActivity" />
         </activity>
         <activity
             android:name=".Map.MapActivity"
-            android:screenOrientation="reversePortrait"></activity>
+            android:screenOrientation="reversePortrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sirryanscott.familymap.Map.MapActivity" />
+        </activity>
     </application>
 
 </manifest>

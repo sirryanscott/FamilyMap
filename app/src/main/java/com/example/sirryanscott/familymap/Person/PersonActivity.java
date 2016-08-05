@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.sirryanscott.familymap.Map.MapActivity;
 import com.example.sirryanscott.familymap.R;
@@ -16,6 +20,8 @@ public class PersonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
         Bundle b =  intent.getExtras();
 
@@ -24,7 +30,6 @@ public class PersonActivity extends AppCompatActivity {
 
             //start a person fragment
             PersonFragment personFragment = PersonFragment.newInstance();
-
 
             Bundle bundle = new Bundle();
             bundle.putString("personId", personId);

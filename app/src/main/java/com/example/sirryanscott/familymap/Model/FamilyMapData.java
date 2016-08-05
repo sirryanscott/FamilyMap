@@ -209,7 +209,7 @@ public class FamilyMapData {
 
                     //Todo: a set of unique events is needed for color of markers and for filter
                     if (!uniqueEvents.containsKey(event.getDescription().toUpperCase())) {
-                        float color = new Random().nextInt(361);
+                        float color = new Random().nextInt(360);
                         uniqueEvents.put(event.getDescription().toUpperCase(), color);
                     }
 
