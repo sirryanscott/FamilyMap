@@ -17,6 +17,9 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="reversePortrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sirryanscott.familymap.MainActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

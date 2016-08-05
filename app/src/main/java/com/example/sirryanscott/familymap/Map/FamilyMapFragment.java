@@ -6,11 +6,15 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sirryanscott.familymap.Model.Event;
 import com.example.sirryanscott.familymap.Model.FamilyMapData;
@@ -48,6 +52,7 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap googleMap;
     private View myView;
 
+    private boolean fragmentForMain;
     private String personID;
     private Event event;
     TextView nameInformation;
@@ -80,6 +85,7 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -126,31 +132,65 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
                             .icon(BitmapDescriptorFactory.defaultMarker(event.getColor())));
             markerStringHashMap.put(marker, event.getEventId());
         }
+
+
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 String eventId = markerStringHashMap.get(marker);
                 setPersonTextViews(eventId);
+                drawEventLines(eventId);
                 return false;
             }
         });
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        super.onCreateOptionsMenu(menu, menuInflater);
+        menuInflater.inflate(R.menu.map_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_search:
+                //start search activity
+                Toast.makeText(getActivity(), "search activity started", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_filter:
+                //start filter activity
+                Toast.makeText(getActivity(), "filter activity started", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_settings:
+                //start settings activity
+                Toast.makeText(getActivity(), "settings activity started", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void drawEventLines(String eventId) {
+        if (eventId != null) {
+            Event event = FamilyMapData.getInstance().getEventMap().get(eventId);
+            Person person = FamilyMapData.getInstance().getPersonMap().get(event.getPersonId());
+            person.getEvents();
+        }
+    }
+
     private void setPersonTextViews(String eventId) {
         if (eventId != null) {
             Event event = FamilyMapData.getInstance().getEventMap().get(eventId);
-                    String personId = event.getPersonId();
-                    this.personID = personId;
-                    Person person = FamilyMapData.getInstance().getPersonMap().get(personId);
+            String personId = event.getPersonId();
+            this.personID = personId;
+            Person person = FamilyMapData.getInstance().getPersonMap().get(personId);
 
-                    nameInformation.setText(person.getFullName());
+            nameInformation.setText(person.getFullName());
 
-                    eventDetails.setText(event.getFullDescription());
+            eventDetails.setText(event.getFullDescription());
 
-                    setGenderIcon(person);
-
-                    //Todo: draw lines (relationships, events)
-
+            setGenderIcon(person);
         }
     }
 
@@ -165,5 +205,9 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
         }
 
         genderImageView.setImageDrawable(genderIcon);
+    }
+
+    public void setFragmentForMain(boolean fragmentForMain) {
+        this.fragmentForMain = fragmentForMain;
     }
 }

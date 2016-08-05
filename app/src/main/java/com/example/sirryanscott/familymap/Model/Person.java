@@ -1,10 +1,9 @@
 package com.example.sirryanscott.familymap.Model;
 
-import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
-import com.example.sirryanscott.familymap.Person.Parent;
 import com.joanzapata.android.iconify.IconDrawable;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -90,6 +89,12 @@ public class Person {
 
     public void setEvents(List<Event> events) {
         this.events = events;
+    }
+
+    public void sortEvents() {
+        List<Event> events = new LinkedList<>();
+
+
     }
 
     public String getDescendant() {

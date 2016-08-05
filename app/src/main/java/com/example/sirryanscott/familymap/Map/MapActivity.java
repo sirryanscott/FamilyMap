@@ -15,6 +15,8 @@ public class MapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
@@ -23,6 +25,8 @@ public class MapActivity extends AppCompatActivity {
 
             //start a map Fragment
             FamilyMapFragment familyMapFragment = FamilyMapFragment.newInstance();
+
+            familyMapFragment.setFragmentForMain(false);
 
             Bundle bundle = new Bundle();
             bundle.putString("eventId", eventId);
