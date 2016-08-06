@@ -12,8 +12,9 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD9w-BQBIMVsFExgOk_NnyR0WBY7XeQJW4" />
-        <!-- android:value="AIzaSyDHCLBvV6cjbSArwVgcSQQ8uKBwdvL-AcQ"/> -->
+            android:value="AIzaSyDHCLBvV6cjbSArwVgcSQQ8uKBwdvL-AcQ" />
+        <!-- android:value="AIzaSyD9w-BQBIMVsFExgOk_NnyR0WBY7XeQJW4" /> -->
+
 
         <activity
             android:name=".MainActivity"
@@ -40,21 +41,21 @@
         </activity>
         <activity
             android:name=".Search.SearchActivity"
-            android:screenOrientation="reversePortrait">>
+            android:screenOrientation="reversePortrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sirryanscott.familymap.Search.SearchActivity" />
         </activity>
         <activity
             android:name=".Filter.FilterActivity"
-            android:screenOrientation="reversePortrait">>
+            android:screenOrientation="reversePortrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sirryanscott.familymap.Filter.FilterActivity" />
         </activity>
         <activity
             android:name=".Settings.SettingsActivity"
-            android:screenOrientation="reversePortrait">>
+            android:screenOrientation="reversePortrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sirryanscott.familymap.Settings.SettingsActivity" />

@@ -1,12 +1,12 @@
 package com.example.sirryanscott.familymap.Filter;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.sirryanscott.familymap.R;
 
@@ -25,6 +25,10 @@ public class FilterFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private View myView;
+    private TextView fatherSide;
+    private ToggleButton fatherToggle;
 
 
     public FilterFragment() {
@@ -58,6 +62,17 @@ public class FilterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_filter, container, false);
+        myView = inflater.inflate(R.layout.fragment_filter, container, false);
+
+        fatherSide = (TextView) myView.findViewById(R.id.fathersSide);
+        fatherToggle = (ToggleButton) myView.findViewById(R.id.fatherToggle);
+
+//        fatherToggle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getActivity(), "Toggled", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        return myView;
     }
 }

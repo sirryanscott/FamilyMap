@@ -3,7 +3,6 @@ package com.example.sirryanscott.familymap.Person;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -116,11 +115,12 @@ public class PersonFragment extends Fragment {
             case R.id.menu_topButton:
                 //Todo: code perfect for logging out
                 Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 return true;
             default:
-                return super.onOptionsItemSelected(item);
+                getActivity().finish();
+                return true;
         }
     }
 

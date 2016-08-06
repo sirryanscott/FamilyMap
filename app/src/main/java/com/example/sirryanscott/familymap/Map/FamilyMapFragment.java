@@ -163,7 +163,7 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
             case R.id.menu_topButton:
                 //Todo: code perfect for logging out
                 Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 return true;
             case R.id.menu_search:
@@ -172,10 +172,12 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
                 return true;
             case R.id.menu_filter:
                 //start filter activity
+                ((MainActivity) getActivity()).startFilterActivity();
                 Toast.makeText(getActivity(), "filter activity started", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_settings:
                 //start settings activity
+                ((MainActivity) getActivity()).startSettingsActivity();
                 Toast.makeText(getActivity(), "settings activity started", Toast.LENGTH_SHORT).show();
                 return true;
             default:

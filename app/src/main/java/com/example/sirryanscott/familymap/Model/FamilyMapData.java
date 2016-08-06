@@ -17,11 +17,11 @@ import java.util.TreeMap;
  * Created by sirryanscott on 7/28/16.
  */
 public class FamilyMapData {
-
     private TreeMap<String, Person> personMap;
     private TreeMap<String, Event> eventMap;
     private TreeMap<Marker, Event> markerEventTreeMap;
     private HashMap<String, Float> uniqueEvents;
+
 
     private static FamilyMapData ourInstance = new FamilyMapData();
 
@@ -263,5 +263,12 @@ public class FamilyMapData {
 
             }
         }
+    }
+
+    public void clearData() {
+        personMap = new TreeMap<>();
+        eventMap = new TreeMap<>();
+        markerEventTreeMap = new TreeMap<>();
+        uniqueEvents = new HashMap();
     }
 }
