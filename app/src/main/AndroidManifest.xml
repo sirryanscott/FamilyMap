@@ -38,9 +38,27 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sirryanscott.familymap.Map.MapActivity" />
         </activity>
-        <activity android:name=".Search.SearchActivity" />
-        <activity android:name=".Filter.FilterActivity" />
-        <activity android:name=".Settings.SettingsActivity"></activity>
+        <activity
+            android:name=".Search.SearchActivity"
+            android:screenOrientation="reversePortrait">>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sirryanscott.familymap.Search.SearchActivity" />
+        </activity>
+        <activity
+            android:name=".Filter.FilterActivity"
+            android:screenOrientation="reversePortrait">>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sirryanscott.familymap.Filter.FilterActivity" />
+        </activity>
+        <activity
+            android:name=".Settings.SettingsActivity"
+            android:screenOrientation="reversePortrait">>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sirryanscott.familymap.Settings.SettingsActivity" />
+        </activity>
     </application>
 
 </manifest>

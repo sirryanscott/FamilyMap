@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -169,7 +168,7 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
                 return true;
             case R.id.menu_search:
                 //start search activity
-                Toast.makeText(getActivity(), "search activity started", Toast.LENGTH_SHORT).show();
+                ((MainActivity) getActivity()).startSearchActivity();
                 return true;
             case R.id.menu_filter:
                 //start filter activity

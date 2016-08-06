@@ -1,11 +1,13 @@
 package com.example.sirryanscott.familymap;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.sirryanscott.familymap.Login.LoginFragment;
 import com.example.sirryanscott.familymap.Map.FamilyMapFragment;
+import com.example.sirryanscott.familymap.Search.SearchActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,5 +29,11 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.mainFragmentHolder, familyMapFragment).commit();
+    }
+
+    public void startSearchActivity() {
+        Intent intent = new Intent(this, SearchActivity.class);
+
+        startActivity(intent);
     }
 }

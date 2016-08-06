@@ -29,7 +29,7 @@
     <EditText
         android:id="@+id/serverHost"
         android:hint="Server Host"
-        android:text="10.13.72.116"
+        android:text="75.162.110.41"
         android:inputType="phone"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
