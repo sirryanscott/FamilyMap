@@ -2,13 +2,25 @@ package com.example.sirryanscott.familymap.Search;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.sirryanscott.familymap.Model.Event;
+import com.example.sirryanscott.familymap.Model.FamilyMapData;
+import com.example.sirryanscott.familymap.Model.Person;
+import com.example.sirryanscott.familymap.Person.Child;
 import com.example.sirryanscott.familymap.R;
+import com.joanzapata.android.iconify.IconDrawable;
+import com.joanzapata.android.iconify.Iconify;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,8 +85,67 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 searchResult = searchBox.getText().toString();
+
+                setRecyclerView(searchResult);
+
             }
         });
         return myView;
+    }
+
+    private void setRecyclerView(String searchResult) {
+        if (searchResult != null) {
+            List<Child> personResults = new LinkedList<>();
+            List<Child> eventResults = new LinkedList<>();
+
+            for (Map.Entry<String, Person> personEntry : FamilyMapData.getInstance().getPersonMap().entrySet()) {
+                Person person = personEntry.getValue();
+                if (person.getFullName().toLowerCase().contains(searchResult)) {
+                    IconDrawable iconDrawable;
+                    if (person.getGender().toLowerCase().equals("f")) {
+                        iconDrawable = new IconDrawable(getActivity(), Iconify.IconValue.fa_female).color(16728448).sizeDp(40);
+                    } else {
+                        iconDrawable = new IconDrawable(getActivity(), Iconify.IconValue.fa_male).color(255).sizeDp(40);
+                    }
+
+
+                    Child child = new Child(
+                            person.getFullName(),
+                            "",
+                            iconDrawable
+                    );
+                    child.setPersonId(person.getPersonId());
+                    personResults.add(child);
+                }
+            }
+
+            for (Map.Entry<String, Event> eventEntry : FamilyMapData.getInstance().getEventMap().entrySet()) {
+                Event event = eventEntry.getValue();
+                Person currentPerson = FamilyMapData.getInstance().getPersonMap().get(event.getPersonId());
+                if (event.getFullDescription().contains(searchResult)) {
+                    Child child = new Child(
+                            event.getFullDescription(),
+                            currentPerson.getFullName(),
+                            new IconDrawable(getActivity(), Iconify.IconValue.fa_map_marker).color(8421504).sizeDp(40) //color gray
+                    );
+
+                    child.setEventId(event.getEventId());
+                    personResults.add(child);
+                }
+            }
+
+
+            RecyclerView peopleRecyclerView = (RecyclerView) myView.findViewById(R.id.peopleResults);
+//            RecyclerView eventRecyclerView = (RecyclerView) myView.findViewById(R.id.eventResults);
+
+            SearchAdapter peopleSearchAdapter = new SearchAdapter(personResults);
+//            SearchAdapter eventSearchAdapter = new SearchAdapter(eventResults);
+
+            peopleRecyclerView.setAdapter(peopleSearchAdapter);
+//            eventRecyclerView.setAdapter(eventSearchAdapter);
+
+            peopleRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//            eventRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }
     }
 }

@@ -120,16 +120,16 @@ public class FamilyMapData {
                             LoginData.getInstance().getCurrentUser().setLastName(jsonObject.getString("lastName"));
                         }
                         if(jsonObject.has("gender")){
-                            LoginData.getInstance().getCurrentUser().setGender("gender");
+                            LoginData.getInstance().getCurrentUser().setGender(jsonObject.getString("gender"));
                         }
                         if(jsonObject.has("spouse")){
-                            LoginData.getInstance().getCurrentUser().setSpouseId("spouse");
+                            LoginData.getInstance().getCurrentUser().setSpouseId(jsonObject.getString("spouse"));
                         }
                         if(jsonObject.has("father")){
-                            LoginData.getInstance().getCurrentUser().setFatherId("father");
+                            LoginData.getInstance().getCurrentUser().setFatherId(jsonObject.getString("father"));
                         }
                         if(jsonObject.has("mother")){
-                            LoginData.getInstance().getCurrentUser().setMotherId("mother");
+                            LoginData.getInstance().getCurrentUser().setMotherId(jsonObject.getString("mother"));
                         }
 
 

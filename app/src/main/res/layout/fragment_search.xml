@@ -37,7 +37,13 @@
 
     <android.support.v7.widget.RecyclerView
         app:layoutManager="LinearLayoutManager"
-        android:id="@+id/searchResults"
+        android:id="@+id/peopleResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+    <android.support.v7.widget.RecyclerView
+        app:layoutManager="LinearLayoutManager"
+        android:id="@+id/eventResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
