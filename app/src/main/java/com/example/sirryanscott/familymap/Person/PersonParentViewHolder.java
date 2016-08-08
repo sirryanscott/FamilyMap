@@ -1,7 +1,6 @@
 package com.example.sirryanscott.familymap.Person;
 
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.sirryanscott.familymap.R;
@@ -11,12 +10,10 @@ import com.example.sirryanscott.familymap.R;
  */
 public class PersonParentViewHolder extends com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder {
     public TextView mtitleTextView;
-    public ImageButton mParentDropDownArrow;
 
     public PersonParentViewHolder(View myView){
         super(myView);
 
         mtitleTextView = (TextView) itemView.findViewById(R.id.parent_list_item_title_text_view);
-//        mParentDropDownArrow = (ImageButton) itemView.findViewById(R.id.parent_list_item_expand_arrow);
     }
 }
