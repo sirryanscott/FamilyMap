@@ -2,6 +2,7 @@ package com.example.sirryanscott.familymap.Map;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,11 +27,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,10 +61,14 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
     private boolean fragmentForMain;
     private String personID;
     private Event event;
-    TextView nameInformation;
-    TextView eventDetails;
-    ImageView genderImageView;
+    private TextView nameInformation;
+    private TextView eventDetails;
+    private ImageView genderImageView;
     private HashMap<Marker, String> markerStringHashMap = new HashMap<>();
+
+    private ArrayList<Polyline> spouseLines = new ArrayList();
+    private ArrayList<Polyline> familyTreeLines = new ArrayList<>();
+    private ArrayList<Polyline> lifeStoryLine = new ArrayList<>();
 
     public FamilyMapFragment() {
         // Required empty public constructor
@@ -123,23 +132,19 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        this.googleMap = googleMap;
-        for (Map.Entry<String, Event> iterator : FamilyMapData.getInstance().getEventMap().entrySet()) {
-            Event event = iterator.getValue();
-            Marker marker = googleMap.addMarker(
-                    new MarkerOptions()
-                            .position(event.getPosition())
-                            .icon(BitmapDescriptorFactory.defaultMarker(event.getColor())));
-            markerStringHashMap.put(marker, event.getEventId());
-        }
+    public void onMapReady(final GoogleMap googleMap) {
+        FamilyMapData.getInstance().setGoogleMap(googleMap);
 
+        drawGoogleMap();
 
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                googleMap.clear();
+                drawGoogleMap();
                 String eventId = markerStringHashMap.get(marker);
                 setPersonTextViews(eventId);
+                setSpouseLine(marker);
                 drawEventLines(eventId);
                 return false;
             }
@@ -185,6 +190,46 @@ public class FamilyMapFragment extends Fragment implements OnMapReadyCallback {
                 return true;
 //                return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onResume() {
+        if (FamilyMapData.getInstance().getGoogleMap() != null) {
+            drawGoogleMap();
+        }
+        super.onResume();
+    }
+
+    private void drawGoogleMap() {
+        FamilyMapData.getInstance().getGoogleMap().setMapType(FamilyMapData.getInstance().getGoogleMapType());
+        this.googleMap = FamilyMapData.getInstance().getGoogleMap();
+        for (Map.Entry<String, Event> iterator : FamilyMapData.getInstance().getEventMap().entrySet()) {
+            Event event = iterator.getValue();
+            Marker marker = googleMap.addMarker(
+                    new MarkerOptions()
+                            .position(event.getPosition())
+                            .icon(BitmapDescriptorFactory.defaultMarker(event.getColor())));
+            markerStringHashMap.put(marker, event.getEventId());
+        }
+    }
+
+    private void setSpouseLine(Marker marker) {
+        if (personID != null) {
+            Person person = FamilyMapData.getInstance().getPersonMap().get(personID);
+
+            if (person.getSpouse() != null) {
+                LatLng spouseBirth = person.getSpouse().getEvents().first().getPosition();
+                Polyline line = googleMap.addPolyline(new PolylineOptions()
+                        .add(marker.getPosition(), spouseBirth)
+                        .width(5)
+                        .color(Color.RED));
+                spouseLines.add(line);
+            }
+        }
+    }
+
+    private void drawSpouseLine() {
+
     }
 
     private void drawEventLines(String eventId) {

@@ -6,7 +6,7 @@ import com.google.android.gms.maps.model.Marker;
 /**
  * Created by sirryanscott on 7/28/16.
  */
-public class Event {
+public class Event implements Comparable<Event> {
     private String eventId;
     private String personId;
     private String latitudeStr;
@@ -159,5 +159,22 @@ public class Event {
 
     public void setDescendantId(String descendantId) {
         this.descendantId = descendantId;
+    }
+
+    @Override
+    public int compareTo(Event that) {
+        int result;
+        if (that.getDescription().equals("birth")) {
+            result = 1;
+        } else if (that.getDescription().equals("death")) {
+            result = -1;
+        } else if (Integer.parseInt(that.getYear()) < Integer.parseInt(this.getYear())) {
+            result = 1;
+        } else if (Integer.parseInt(that.getYear()) > Integer.parseInt(this.getYear())) {
+            result = -1;
+        } else {
+            result = 0;
+        }
+        return result;
     }
 }

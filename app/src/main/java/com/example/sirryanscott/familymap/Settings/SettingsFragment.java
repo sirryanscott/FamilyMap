@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.example.sirryanscott.familymap.HttpClient;
 import com.example.sirryanscott.familymap.MainActivity;
 import com.example.sirryanscott.familymap.Model.FamilyMapData;
 import com.example.sirryanscott.familymap.R;
+import com.google.android.gms.maps.GoogleMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +38,7 @@ public class SettingsFragment extends Fragment {
     private View myView;
     private TextView logout;
     private TextView resyncData;
+    private Spinner spinner;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -73,6 +76,10 @@ public class SettingsFragment extends Fragment {
         logout = (TextView) myView.findViewById(R.id.logout);
         resyncData = (TextView) myView.findViewById(R.id.ReSyncData);
 
+        setSpinners();
+        spinner.setSelection(FamilyMapData.getInstance().getSpinnerSelection());
+
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +99,39 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        setSpinners();
+        spinner = (Spinner) myView.findViewById(R.id.mapTypeSpinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        FamilyMapData.getInstance().setGoogleMapType(GoogleMap.MAP_TYPE_NORMAL);
+                        FamilyMapData.getInstance().setSpinnerSelection(0);
+                        break;
+                    case 1:
+                        FamilyMapData.getInstance().setGoogleMapType(GoogleMap.MAP_TYPE_HYBRID);
+                        FamilyMapData.getInstance().setSpinnerSelection(1);
+                        break;
+                    case 2:
+                        FamilyMapData.getInstance().setGoogleMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                        FamilyMapData.getInstance().setSpinnerSelection(2);
+                        break;
+                    case 3:
+                        FamilyMapData.getInstance().setGoogleMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                        FamilyMapData.getInstance().setSpinnerSelection(3);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
         return myView;
 
     }
@@ -168,7 +207,7 @@ public class SettingsFragment extends Fragment {
 
 
         //SET MAP-TYPE SPINNER
-        Spinner spinner = (Spinner) myView.findViewById(R.id.mapTypeSpinner);
+        spinner = (Spinner) myView.findViewById(R.id.mapTypeSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.map_types, android.R.layout.simple_spinner_item);
@@ -177,6 +216,4 @@ public class SettingsFragment extends Fragment {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
     }
-
-
 }

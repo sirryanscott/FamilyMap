@@ -24,6 +24,8 @@ public class FamilyMapData {
     private HashMap<String, Float> uniqueEvents;
 
     private GoogleMap googleMap;
+    private int googleMapType;
+    private int spinnerSelection;
 
 
     private static FamilyMapData ourInstance = new FamilyMapData();
@@ -37,6 +39,32 @@ public class FamilyMapData {
         eventMap = new TreeMap<>();
         markerEventTreeMap = new TreeMap<>();
         uniqueEvents = new HashMap();
+        googleMapType = GoogleMap.MAP_TYPE_NORMAL;
+        spinnerSelection = 0;
+    }
+
+    public int getSpinnerSelection() {
+        return spinnerSelection;
+    }
+
+    public void setSpinnerSelection(int spinnerSelection) {
+        this.spinnerSelection = spinnerSelection;
+    }
+
+    public int getGoogleMapType() {
+        return googleMapType;
+    }
+
+    public void setGoogleMapType(int googleMapType) {
+        this.googleMapType = googleMapType;
+    }
+
+    public GoogleMap getGoogleMap() {
+        return googleMap;
+    }
+
+    public void setGoogleMap(GoogleMap googleMap) {
+        this.googleMap = googleMap;
     }
 
     public HashMap<String, Float> getUniqueEvents() {

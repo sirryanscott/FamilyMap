@@ -3,8 +3,8 @@ package com.example.sirryanscott.familymap.Model;
 import com.joanzapata.android.iconify.IconDrawable;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * Created by sirryanscott on 7/28/16.
@@ -20,14 +20,14 @@ public class Person {
     private String fatherId;
     private String motherId;
     private String descendant;
-    private List<Event> events;
+    private TreeSet<Event> events;
     private Person spouse;
     private Person Father;
     private Person Mother;
     private List<Person> children;
 
     public Person(){
-        events = new ArrayList<>();
+        events = new TreeSet<>();
         children = new ArrayList<>();
     }
 
@@ -83,18 +83,12 @@ public class Person {
         Mother = mother;
     }
 
-    public List<Event> getEvents() {
+    public TreeSet<Event> getEvents() {
         return events;
     }
 
-    public void setEvents(List<Event> events) {
+    public void setEvents(TreeSet<Event> events) {
         this.events = events;
-    }
-
-    public void sortEvents() {
-        List<Event> events = new LinkedList<>();
-
-
     }
 
     public String getDescendant() {

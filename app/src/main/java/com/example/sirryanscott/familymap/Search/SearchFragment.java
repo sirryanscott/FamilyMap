@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.sirryanscott.familymap.R;
 
@@ -27,7 +27,9 @@ public class SearchFragment extends Fragment {
     private String mParam2;
 
     private View myView;
+    private EditText searchBox;
     private ImageView searchImage;
+    private String searchResult;
 
 
     public SearchFragment() {
@@ -63,13 +65,14 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         myView = inflater.inflate(R.layout.fragment_search, container, false);
 
+        searchBox = (EditText) myView.findViewById(R.id.searchField);
         searchImage = (ImageView) myView.findViewById(R.id.searchButton);
         searchImage.setImageResource(R.drawable.ic_search_black_24dp);
 
         searchImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "TEXT SEARCHED", Toast.LENGTH_SHORT).show();
+                searchResult = searchBox.getText().toString();
             }
         });
         return myView;
