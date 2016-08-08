@@ -2,13 +2,20 @@ package com.example.sirryanscott.familymap.Filter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.example.sirryanscott.familymap.Model.FamilyMapData;
 import com.example.sirryanscott.familymap.R;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,8 +71,8 @@ public class FilterFragment extends Fragment {
         // Inflate the layout for this fragment
         myView = inflater.inflate(R.layout.fragment_filter, container, false);
 
-        fatherSide = (TextView) myView.findViewById(R.id.fathersSide);
-        fatherToggle = (ToggleButton) myView.findViewById(R.id.fatherToggle);
+//        fatherSide = (TextView) myView.findViewById(R.id.fathersSide);
+//        fatherToggle = (ToggleButton) myView.findViewById(R.id.fatherToggle);
 
 //        fatherToggle.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -73,6 +80,23 @@ public class FilterFragment extends Fragment {
 //                Toast.makeText(getActivity(), "Toggled", Toast.LENGTH_SHORT).show();
 //            }
 //        });
+
+        setRecyclerView();
         return myView;
+    }
+
+    private void setRecyclerView() {
+        List<String> eventNames = new LinkedList<>();
+
+        for (Map.Entry<String, Float> allUniqueEvents : FamilyMapData.getInstance().getUniqueEvents().entrySet()) {
+            eventNames.add(allUniqueEvents.getKey() + " EVENTS");
+        }
+
+        RecyclerView recyclerView = (RecyclerView) myView.findViewById(R.id.uniqueEvents);
+
+        FilterAdapter filterAdapter = new FilterAdapter(eventNames);
+
+        recyclerView.setAdapter(filterAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 }
