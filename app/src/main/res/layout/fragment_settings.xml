@@ -20,9 +20,14 @@
             android:text="Life Story Lines"
             android:id="@+id/lifeStoryLines"
             android:textSize="10pt"
-            android:layout_weight="2"
+            android:layout_weight="4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/lifeStoryLinesSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
 
         <ToggleButton
             android:clickable="true"
@@ -48,9 +53,14 @@
             android:id="@+id/familyTreeLines"
             android:text="Family Tree Lines"
             android:textSize="10pt"
-            android:layout_weight="2"
+            android:layout_weight="4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/familyTreeLinesSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
 
         <ToggleButton
             android:clickable="true"
@@ -75,9 +85,14 @@
             android:id="@+id/spouseLines"
             android:text="Spouse Lines"
             android:textSize="10pt"
-            android:layout_weight="2"
+            android:layout_weight="4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/spouseLinesSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
 
         <ToggleButton
             android:clickable="true"
@@ -106,12 +121,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!--<android.support.v7.widget.DropDownListView-->
-        <!--android:clickable="true"-->
-        <!--android:id="@+id/mapTypeToggle"-->
-        <!--android:layout_weight="10"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
+        <Spinner
+            android:id="@+id/mapTypeSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
     </LinearLayout>
 
     <View

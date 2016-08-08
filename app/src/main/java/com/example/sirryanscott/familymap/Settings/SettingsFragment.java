@@ -7,10 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.sirryanscott.familymap.HttpClient;
-import com.example.sirryanscott.familymap.Login.LoginData;
 import com.example.sirryanscott.familymap.MainActivity;
 import com.example.sirryanscott.familymap.Model.FamilyMapData;
 import com.example.sirryanscott.familymap.R;
@@ -83,15 +84,6 @@ public class SettingsFragment extends Fragment {
         resyncData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                singleton = constructor;
-                String authorization = LoginData.getInstance().getCurrentUser().getAuthorization();
-                String personId = LoginData.getInstance().getCurrentUser().getPersonId();
-
-
-//                LoginData.getInstance().getCurrentUser().setAuthorization(authorization);
-//                LoginData.getInstance().getCurrentUser().setPersonId(personId);
-
-
                 FamilyMapData.getInstance().clearData();
 
 
@@ -100,6 +92,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        setSpinners();
         return myView;
 
     }
@@ -138,6 +131,51 @@ public class SettingsFragment extends Fragment {
                 getActivity().finish();
             }
         }
+    }
+
+    private void setSpinners() {
+        //SET LIFE STORY COLOR SPINNER
+        Spinner lifeStorySpinner = (Spinner) myView.findViewById(R.id.lifeStoryLinesSpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> lifeStoryAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.line_color_types, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        lifeStoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        lifeStorySpinner.setAdapter(lifeStoryAdapter);
+
+
+        //SET FAMILY TREE LINES SPINNER
+        Spinner familyTreeLineSpinner = (Spinner) myView.findViewById(R.id.familyTreeLinesSpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> familyTreeLineAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.line_color_types, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        familyTreeLineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        familyTreeLineSpinner.setAdapter(familyTreeLineAdapter);
+
+
+        //SET SPOUSE LINE SPINNER
+        Spinner spouseLineSpinner = (Spinner) myView.findViewById(R.id.spouseLinesSpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> spouseLineAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.line_color_types, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        spouseLineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spouseLineSpinner.setAdapter(spouseLineAdapter);
+
+
+        //SET MAP-TYPE SPINNER
+        Spinner spinner = (Spinner) myView.findViewById(R.id.mapTypeSpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.map_types, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
     }
 
 

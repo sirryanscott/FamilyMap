@@ -71,16 +71,6 @@ public class FilterFragment extends Fragment {
         // Inflate the layout for this fragment
         myView = inflater.inflate(R.layout.fragment_filter, container, false);
 
-//        fatherSide = (TextView) myView.findViewById(R.id.fathersSide);
-//        fatherToggle = (ToggleButton) myView.findViewById(R.id.fatherToggle);
-
-//        fatherToggle.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(getActivity(), "Toggled", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
         setRecyclerView();
         return myView;
     }

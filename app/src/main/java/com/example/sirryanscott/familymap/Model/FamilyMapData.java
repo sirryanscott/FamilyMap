@@ -1,6 +1,7 @@
 package com.example.sirryanscott.familymap.Model;
 
 import com.example.sirryanscott.familymap.Login.LoginData;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
@@ -21,6 +22,8 @@ public class FamilyMapData {
     private TreeMap<String, Event> eventMap;
     private TreeMap<Marker, Event> markerEventTreeMap;
     private HashMap<String, Float> uniqueEvents;
+
+    private GoogleMap googleMap;
 
 
     private static FamilyMapData ourInstance = new FamilyMapData();
